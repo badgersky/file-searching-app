@@ -38,7 +38,7 @@ def test_find_multiple_files_with_ex(tmp_path, m_files):
 
 
 def test_find_file_if_file_dont_exist(tmp_path, m_files):
-    filename = 'noexist'
+    filename = 'no_exist'
 
     result = find_file(tmp_path, filename)
     assert f'No such file: {filename}' == result
