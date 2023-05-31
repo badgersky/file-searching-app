@@ -35,4 +35,10 @@ def test_find_multiple_files_with_ex(tmp_path, m_files):
     filenames = [file[0] for file in result]
     assert len(result) == 2
     assert filenames.count('test.txt') == 2
-    
+
+
+def test_find_file_if_file_dont_exist(tmp_path, m_files):
+    filename = 'noexist'
+
+    result = find_file(tmp_path, filename)
+    assert f'No such file: {filename}' == result
