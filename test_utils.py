@@ -54,4 +54,11 @@ def test_format_result(tmp_path, s_file):
     result = format_result(find_file(tmp_path, filename))
     assert f'path: {full_path}' in result
     assert f'filename: {filename}' in result
+
+
+def test_format_result_file_dont_exits(tmp_path):
+    filename = 'no_exist'
+
+    result = format_result(find_file(tmp_path, filename))
+    assert result == 'No such file'
     
