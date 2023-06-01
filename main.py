@@ -1,4 +1,25 @@
 import tkinter as tk
+from pathlib import Path
+
+from utils import find_file
+
+
+def display_files():
+    # delete previous results
+    txt_result.delete('0.0', tk.END)
+
+    # get path and filename from form
+    path = Path(ent_path.get())
+    filename = ent_filename.get()
+
+    # get and format result
+    results = find_file(path, filename)
+    formatted_results = '-' * 120 + '\n'
+    for file in results:
+        formatted_result = f'path: {file[1]}\nfilename: {file[0]}\n'
+        formatted_results += formatted_result + '-' * 120 + '\n'
+
+    txt_result.insert('0.0', formatted_results)
 
 
 window = tk.Tk()
@@ -24,12 +45,12 @@ ent_filename = tk.Entry(master=frm_form, width=50)
 lbl_filename.grid(row=1, column=0, pady=5, padx=2, sticky='e')
 ent_filename.grid(row=1, column=1, pady=5, padx=2, sticky='w')
 
-btn_search = tk.Button(master=frm_form, relief=tk.RAISED, width=20, text='Search')
+btn_search = tk.Button(master=frm_form, relief=tk.RAISED, width=20, text='Search', command=display_files)
 btn_search.grid(row=2, column=1, pady=5, padx=2, sticky='w')
 
 # Results frame
 lbl_frm_result = tk.LabelFrame(master=window, relief=tk.SUNKEN, text='Search Results', padx=10, pady=10)
-txt_result = tk.Text(master=lbl_frm_result, width=100, height=10)
+txt_result = tk.Text(master=lbl_frm_result, width=130, height=10)
 
 lbl_frm_result.rowconfigure(0, weight=2)
 lbl_frm_result.columnconfigure(0, weight=2)
@@ -37,4 +58,6 @@ lbl_frm_result.columnconfigure(0, weight=2)
 lbl_frm_result.grid(row=1, pady=10, padx=10, sticky='nsew')
 txt_result.grid(row=0, column=0, sticky='nsew')
 
-window.mainloop()
+
+if __name__ == '__main__':
+    window.mainloop()

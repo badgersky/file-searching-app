@@ -2,7 +2,7 @@ import os
 
 
 def find_file(path, filename):
-    if '.' not in filename:
+    if not os.path.splitext(filename)[1]:
         result = []
         for paths, dirs, files in os.walk(path):
             file_no_ex = [os.path.splitext(file)[0] for file in files]
