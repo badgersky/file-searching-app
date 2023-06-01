@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 from pathlib import Path
 
 from utils import find_file, format_result
@@ -10,10 +11,18 @@ def display_files():
 
     # get path and filename from form
     path = Path(ent_path.get())
-    filename = ent_filename.get()
+    filename = validate_entry()
 
     # inserts formatted results into text box
     txt_result.insert('0.0', format_result(find_file(path, filename)))
+
+
+def validate_entry():
+    filename = ent_filename.get()
+    if not filename.strip():
+        messagebox.showerror('Filename Error', 'Input valid filename!')
+    else:
+        return filename.strip()
 
 
 window = tk.Tk()
