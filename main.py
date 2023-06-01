@@ -1,7 +1,7 @@
 import tkinter as tk
 from pathlib import Path
 
-from utils import find_file
+from utils import find_file, format_result
 
 
 def display_files():
@@ -12,14 +12,8 @@ def display_files():
     path = Path(ent_path.get())
     filename = ent_filename.get()
 
-    # get and format result
-    results = find_file(path, filename)
-    formatted_results = '-' * 120 + '\n'
-    for file in results:
-        formatted_result = f'path: {file[1]}\nfilename: {file[0]}\n'
-        formatted_results += formatted_result + '-' * 120 + '\n'
-
-    txt_result.insert('0.0', formatted_results)
+    # inserts formatted results into text box
+    txt_result.insert('0.0', format_result(find_file(path, filename)))
 
 
 window = tk.Tk()

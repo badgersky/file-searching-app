@@ -17,6 +17,15 @@ def find_file(path, filename):
     return result
 
 
+def format_result(results):
+    # formats the results
+    formatted_results = '-' * 120 + '\n'
+    for file in results:
+        formatted_result = f'path: {file[1]}\nfilename: {file[0]}\n'
+        formatted_results += formatted_result + '-' * 120 + '\n'
+    return formatted_results
+
+
 if __name__ == '__main__':
     print('-' * 40)
     print(find_file(os.environ.get('HOME'), 'empire_invaders'))
