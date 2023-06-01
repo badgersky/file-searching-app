@@ -5,7 +5,7 @@ from pathlib import Path
 from utils import find_file, format_result
 
 
-def display_files():
+def display_files(event):
     # delete previous results
     txt_result.delete('0.0', tk.END)
 
@@ -30,6 +30,8 @@ window.title('File Searching Tool')
 
 window.rowconfigure(0, weight=0)
 window.rowconfigure(1, weight=1)
+
+window.bind('<Return>', display_files)
 
 # Search frame
 frm_form = tk.Frame(relief=tk.SUNKEN, borderwidth=3)
