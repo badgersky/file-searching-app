@@ -1,4 +1,6 @@
-from utils import find_file
+import os
+
+from utils import find_file, format_result
 
 
 def test_find_file_no_ex(tmp_path, s_file):
@@ -42,3 +44,14 @@ def test_find_file_if_file_dont_exist(tmp_path, m_files):
 
     result = find_file(tmp_path, filename)
     assert result is False
+
+
+def test_format_result(tmp_path, s_file):
+    filename = 'test'
+    dir_name = 'test-dir'
+    full_path = os.path.join(tmp_path, dir_name)
+
+    result = format_result(find_file(tmp_path, filename))
+    assert f'path: {full_path}' in result
+    assert f'filename: {filename}' in result
+    
