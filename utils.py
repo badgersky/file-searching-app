@@ -13,17 +13,20 @@ def find_file(path, filename):
         result = [(files[files.index(filename)], paths) for paths, dirs, files in os.walk(path) if filename in files]
 
     if not result:
-        return f'No such file: {filename}'
+        return False
     return result
 
 
-def format_result(results):
+def format_result(result):
+    if not result:
+        return f'No such file'
+
     # formats the results
-    formatted_results = '-' * 120 + '\n'
-    for file in results:
-        formatted_result = f'path: {file[1]}\nfilename: {file[0]}\n'
-        formatted_results += formatted_result + '-' * 120 + '\n'
-    return formatted_results
+    formatted_result = '-' * 120 + '\n'
+    for file in result:
+        formatted = f'path: {file[1]}\nfilename: {file[0]}\n'
+        formatted_result += formatted + '-' * 120 + '\n'
+    return formatted_result
 
 
 if __name__ == '__main__':
